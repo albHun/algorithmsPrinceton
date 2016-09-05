@@ -11,6 +11,7 @@ public class Percolation {
     public Percolation(int n) {
         if (n <= 0)
             throw new IllegalArgumentException("The length of the grid must be positive.");
+        
         this.n = n;
         sites = new boolean[n*n];
         for (int i = 0; i < n*n; i++)
@@ -49,7 +50,8 @@ public class Percolation {
 
     public void open(int i, int j) {
         check(i, j);
-        this.sites[getPos(i, j)] = true;
+        if (!isOpen(i, j))
+            this.sites[getPos(i, j)] = true;
         
         if (exist(i-1, j) && isOpen(i-1, j)) { 
             uf.union(getPos(i, j), getPos(i-1, j)); 
