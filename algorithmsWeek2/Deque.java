@@ -32,18 +32,24 @@ public class Deque<Item> implements Iterable<Item> {
 	   if (item == null) throw new java.lang.NullPointerException();
 	   else{
 		   Node oldfirst = first;
+		   first = new Node();
 	       first.item = item;
-	       first.next = oldfirst;
+		   if (last == null){
+			   last = first;
+		   }
+		   else first.next = oldfirst;
 	   }
    }          // add the item to the front
    
    public void addLast(Item item){
 	   if (item == null) throw new java.lang.NullPointerException();
 	   else{
+		   Node oldLast = last;
 		   last = new Node();
 		   last.item = item;
-	       last.next = null;
-	       last = last.next;
+		   last.next = null;
+		   if (isEmpty()) first = last;
+	       else oldLast.next = last;
 	   }
    }           // add the item to the end
    
@@ -52,19 +58,26 @@ public class Deque<Item> implements Iterable<Item> {
 	   else{
 		   Node oldfirst = first;
 		   first = first.next;
+		   if (isEmpty()) last = null;
 		   return oldfirst.item;
 	   }
    }                // remove and return the item from the front
    
    public Item removeLast(){
 	   if (isEmpty()) throw new java.util.NoSuchElementException();
+	   else if (first.next == null){
+		   Node temp = first;
+		   first = null;
+		   last = null;
+		   return temp.item;
+	   }
 	   else {
-		   Node tempfirst = first;
-		   while (first.next.next != null) first = first.next;
-		   Node templast = first.next;
-		   first.next = null;
-		   first = tempfirst;
-		   return tempfirst.item;
+		   Node iter = first;
+		   while (iter.next.next != null) iter = iter.next;
+		   Node temp = iter.next;
+		   last = iter;
+		   last.next = null;
+		   return temp.item;
 	   }
    }                 // remove and return the item from the end
    
@@ -83,12 +96,18 @@ public class Deque<Item> implements Iterable<Item> {
    }
    
    public static void main(String[] args){
-	   Deque<Integer> test = new Deque<Integer>();
+	   Deque<String> test = new Deque<String>();
 	   System.out.println(test.isEmpty());
 	   System.out.println(test.size());
-	   test.addFirst(5);
-	   test.addLast(6);
-	   test.removeFirst();
-	   test.removeLast();
+	   String[] str = new String[] {"Qiao", "Chu", "Jiang"};
+	   test.addFirst(str[0]);
+	   test.addLast(str[2]);
+	   test.addFirst(str[1]);
+	   
+	   Iterator<String> itest = test.iterator();
+	   while (itest.hasNext()){
+		   String s = itest.next();
+		   System.out.println(s);
+	   }
    }   // unit testing
 }
