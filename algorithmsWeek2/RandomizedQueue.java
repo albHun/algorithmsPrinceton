@@ -22,12 +22,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    }                 // is the queue empty?
    
    public int size(){
-	   return s.length;
+	   return N;
    }                        // return the number of items on the queue
    
    public void enqueue(Item item){
 	   if (item == null) throw new NullPointerException();
-	   if (s.length == N ) resize(2 * s.length);
+	   if (s.length <= N ) resize(2 * s.length);
 	   s[N++] = item;
    }           // add the item
    
@@ -35,7 +35,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	   if (isEmpty()) throw new java.util.NoSuchElementException();
 	   int index = StdRandom.uniform(N);
 	   Item temp = s[index];
-	   for (int i=index; i < N; i++)
+	   for (int i=index; i < N-1; i++)
 		   s[i] = s[i+1];
 	   N--;
 	   if (s.length >= 4 * N) resize(s.length / 2);

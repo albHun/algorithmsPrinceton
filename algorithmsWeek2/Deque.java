@@ -4,6 +4,7 @@ public class Deque<Item> implements Iterable<Item> {
    private class Node{
 	   Item item;
 	   Node next;
+	   Node pre;
    }
    
    private Node first;
@@ -34,10 +35,14 @@ public class Deque<Item> implements Iterable<Item> {
 		   Node oldfirst = first;
 		   first = new Node();
 	       first.item = item;
+		   first.pre = null;
 		   if (last == null){
 			   last = first;
 		   }
-		   else first.next = oldfirst;
+		   else {
+			   first.next = oldfirst;
+			   oldfirst.pre = first;
+		   }
 	   }
    }          // add the item to the front
    
@@ -49,7 +54,10 @@ public class Deque<Item> implements Iterable<Item> {
 		   last.item = item;
 		   last.next = null;
 		   if (isEmpty()) first = last;
-	       else oldLast.next = last;
+	       else {
+			   oldLast.next = last;
+			   last.pre = oldLast;
+		   }
 	   }
    }           // add the item to the end
    
@@ -59,6 +67,7 @@ public class Deque<Item> implements Iterable<Item> {
 		   Node oldfirst = first;
 		   first = first.next;
 		   if (isEmpty()) last = null;
+		   else first.pre = null;
 		   return oldfirst.item;
 	   }
    }                // remove and return the item from the front
@@ -66,18 +75,16 @@ public class Deque<Item> implements Iterable<Item> {
    public Item removeLast(){
 	   if (isEmpty()) throw new java.util.NoSuchElementException();
 	   else if (first.next == null){
-		   Node temp = first;
+		   Item temp = first.item;
 		   first = null;
 		   last = null;
-		   return temp.item;
+		   return temp;
 	   }
 	   else {
-		   Node iter = first;
-		   while (iter.next.next != null) iter = iter.next;
-		   Node temp = iter.next;
-		   last = iter;
+		   Item temp = last.item;
+		   last = last.pre;
 		   last.next = null;
-		   return temp.item;
+		   return temp;
 	   }
    }                 // remove and return the item from the end
    
@@ -89,6 +96,7 @@ public class Deque<Item> implements Iterable<Item> {
 	   public boolean hasNext(){ return current != null; }
 	   public void remove(){ throw new UnsupportedOperationException(); }
 	   public Item next(){
+		   if (!hasNext()) throw new java.util.NoSuchElementException();
 		   Item item = current.item;
 		   current = current.next;
 		   return item;
