@@ -55,7 +55,7 @@ public class Point implements Comparable<Point> {
 		}
 		else if (this.y == that.y) return +0.0;
 		else {
-			double slope = (that.y - this.y) / (that.x - this.x);
+			double slope = ((that.y - this.y) * 1.0) / (that.x - this.x);
 			return slope;
 		}
     }
@@ -88,9 +88,9 @@ public class Point implements Comparable<Point> {
      *
      * @return the Comparator that defines this ordering on points
      */
-    public Comparator<Point> slopeOrder() {
+    public Comparator<Point> slopeOrder(){
 		return new order();
-    }
+	} 
 	
 	private class order implements Comparator<Point>{
 		public int compare(Point p1, Point p2){
@@ -139,6 +139,27 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
-        /* YOUR CODE HERE */
+        StdDraw.setXscale(0, 5);
+        StdDraw.setYscale(0, 5);
+            
+        Point p = new Point(0, 0);
+        Point p2 = new Point(1, 1);
+        Point p3 = new Point(2, 2);
+        Point p4 = new Point(2, 3);
+        Point p5 = new Point(3, 2);           
+
+        p.drawTo(p2);
+        p.drawTo(p3);
+        p.drawTo(p4);
+        p.drawTo(p5);
+		
+		Comparator<Point> f = p.slopeOrder();
+        
+        System.out.println(f.compare(p2, p3));
+        System.out.println(f.compare(p3, p4));
+        System.out.println(f.compare(p4, p5));
+        
+        System.out.println(p3.slopeTo(p5));
+        System.out.println(p3.slopeTo(p4));
     }
 }
