@@ -26,13 +26,15 @@ public class FastCollinearPoints {
                     }
                 }
             Arrays.sort(slopePoints);
-            for (int j = 0; j < points.length-3; j++)
-                if (slopePoints[j] == slopePoints[j + 1] && slopePoints[j + 2] == slopePoints[j + 1])
-                    seg.add(new LineSegment(points[i], points[j + 2]));
-            }
-        }
+            //for (int j = 0; j < points.length-3; j++)
+              //  if (slopePoints[j] == slopePoints[j + 1] && slopePoints[j + 2] == slopePoints[j + 1])
+                //    seg.add(new LineSegment(points[i], points[j + 2]));
+            //}
+			
+			}
         segments = seg.toArray(new LineSegment[seg.size()]);
-    }
+		}
+	}
     
     public int numberOfSegments() {
         return segments.length;
