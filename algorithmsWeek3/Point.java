@@ -50,14 +50,14 @@ public class Point implements Comparable<Point> {
      */
     public double slopeTo(Point that) {
         if (this.x == that.x) {
-			if (this.y == that.y) return Double.NEGATIVE_INFINITY;
-			else return Double.POSITIVE_INFINITY;
-		}
-		else if (this.y == that.y) return +0.0;
-		else {
-			double slope = ((that.y - this.y) * 1.0) / (that.x - this.x);
-			return slope;
-		}
+            if (this.y == that.y) return Double.NEGATIVE_INFINITY;
+            else return Double.POSITIVE_INFINITY;
+        }
+        else if (this.y == that.y) return +0.0;
+        else {
+            double slope = ((that.y - this.y) * 1.0) / (that.x - this.x);
+            return slope;
+        }
     }
 
     /**
@@ -74,12 +74,12 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         if (this.y < that.y) return -1;
-		else if (this.y == that.y) {
-			if (this.x < that.x) return -1;
-			else if (this.x == that.x) return 0;
-			else return 1;
-		}
-		else return 1;
+        else if (this.y == that.y) {
+            if (this.x < that.x) return -1;
+            else if (this.x == that.x) return 0;
+            else return 1;
+        }
+        else return 1;
     }
 
     /**
@@ -89,17 +89,17 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-		return new order();
-	} 
-	
-	private class order implements Comparator<Point> {
-		public int compare(Point p1, Point p2) {
-			double s1 = slopeTo(p1), s2 = slopeTo(p2);
-			if (s1 == s2) return 0;
-			else if (s1 > s2) return 1;
-			else return -1;
-		}
-	}
+        return new Order();
+    } 
+    
+    private class Order implements Comparator<Point> {
+        public int compare(Point p1, Point p2) {
+            double s1 = slopeTo(p1), s2 = slopeTo(p2);
+            if (s1 == s2) return 0;
+            else if (s1 > s2) return 1;
+            else return -1;
+        }
+    }
 
 
     /**
@@ -120,19 +120,19 @@ public class Point implements Comparable<Point> {
      *
      * @return a string representation of this point
      */
-    public int hashCode() {
+    // public int hashCode() {
         /* DO NOT MODIFY */
-        throw new UnsupportedOperationException("calling hashCode() is not permitted on this assignment");
-    }
+    //    throw new UnsupportedOperationException("calling hashCode() is not permitted on this assignment");
+    // }
 
     /**
      * You should not call the equals() method on this assignment.
      * This means that you should not use java.util.TreeMap or java.util.TreeSet.
      */
-    public boolean equals(Object that) {
+    // public boolean equals(Object that) {
         /* DO NOT MODIFY */
-        throw new UnsupportedOperationException("calling equals() is not permitted on this assignment");
-    }
+    //    throw new UnsupportedOperationException("calling equals() is not permitted on this assignment");
+    // } 
 
 
     /**
@@ -152,8 +152,8 @@ public class Point implements Comparable<Point> {
         p.drawTo(p3);
         p.drawTo(p4);
         p.drawTo(p5);
-		
-		Comparator<Point> f = p.slopeOrder();
+        
+        Comparator<Point> f = p.slopeOrder();
         
         System.out.println(f.compare(p2, p3));
         System.out.println(f.compare(p3, p4));
