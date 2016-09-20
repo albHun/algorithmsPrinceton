@@ -120,19 +120,19 @@ public class Point implements Comparable<Point> {
      *
      * @return a string representation of this point
      */
-    // public int hashCode() {
+    public int hashCode() {
         /* DO NOT MODIFY */
-    //    throw new UnsupportedOperationException("calling hashCode() is not permitted on this assignment");
-    // }
+        throw new UnsupportedOperationException("calling hashCode() is not permitted on this assignment");
+    }
 
     /**
      * You should not call the equals() method on this assignment.
      * This means that you should not use java.util.TreeMap or java.util.TreeSet.
      */
-    // public boolean equals(Object that) {
-        /* DO NOT MODIFY */
-    //    throw new UnsupportedOperationException("calling equals() is not permitted on this assignment");
-    // } 
+    public boolean equals(Object that) {
+		/* DO NOT MODIFY */
+        throw new UnsupportedOperationException("calling equals() is not permitted on this assignment");
+    } 
 
 
     /**
